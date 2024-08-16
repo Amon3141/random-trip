@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- 基本設定みたいな -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie-edge">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'randomtrip/css/styles.css' %}">
+</head>
+<body>
+  <header>
+    <!-- Header ここ -->
+  </header>
+
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <script src="{% static 'randomtrip/js/scripts.js' %}"></script>
+</html>
