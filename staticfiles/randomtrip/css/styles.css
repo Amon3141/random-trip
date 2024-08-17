@@ -32,3 +32,118 @@ body, html {
 .start-button:hover {
     background-color: #0056b3;
 }
+
+/* === Home Screen Styles === */
+
+body.randomtrip {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    position: relative;
+    height: 100vh;
+    background-color: #f0f0f0; /* Light gray background color */
+}
+
+.button-container {
+    position: absolute;
+    bottom: 33%; /* Position the button 1/3 from the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.start-button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.start-button:hover {
+    background-color: #0056b3;
+}
+
+/* === Option Screen Styles === */
+
+body.option-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f0f0f0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    position: relative; /* Ensure the body can be used for positioning elements absolutely */
+}
+
+.container {
+    text-align: center;
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    position: relative;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input[type="number"]:focus {
+    border-color: #007bff;
+}
+
+button.option-button {
+    padding: 12px 24px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.option-button:hover {
+    background-color: #0056b3;
+}
+
+.button-wrapper {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Back button styling */
+.back-button {
+    position: absolute;
+    top: 20px; /* Adjust as needed */
+    left: 20px; /* Adjust as needed */
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
