@@ -133,10 +133,10 @@ def create_csv():
   driver.quit()
 
 
-site_df = pd.DataFrame(columns=["Name", "Address", "Latitude", "Longitude", "Homepage", "Description"])
-create_csv()
-print(site_df.head(10))
-site_df.to_csv("data/site_data.csv", index=False)
+#site_df = pd.DataFrame(columns=["Name", "Address", "Latitude", "Longitude", "Homepage", "Description"])
+#create_csv()
+#print(site_df.head(10))
+#site_df.to_csv("data/site_data.csv", index=False)
 
 #site_df_load = pd.read_csv("data/site_data.csv")
 #print(site_df_load.shape)

@@ -6,4 +6,5 @@ app_name = 'notes'
 urlpatterns = [
   path('', views.randomtrip, name='randomtrip'),
   path('option_screen/', views.option_screen, name='option_screen'),
+  path('test/', views.test_screen, name='test')
 ]

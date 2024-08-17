@@ -7,4 +7,7 @@ def randomtrip(request):
   return render(request, 'randomtrip.html')
 
 def option_screen(request):
-    return render(request, 'option_screen.html')
+  return render(request, 'option_screen.html')
+  
+def test_screen(request):
+  return render(request, 'test.html')
