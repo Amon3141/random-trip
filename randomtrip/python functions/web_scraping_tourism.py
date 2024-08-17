@@ -5,14 +5,14 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
-import time
-import numpy as np
 import pandas as pd
 import geocoder
 import requests
 import urllib
 from geopy.geocoders import Nominatim
 
+
+# get the content in the base info table, where the row's title is one of header_text_list
 def parse_content(header_text_list, soup):
   for header_text in header_text_list:
     site_content_th = soup.find('th', class_='basic-information__contents-title', string=header_text)
@@ -33,6 +33,19 @@ def parse_content(header_text_list, soup):
   return site_content_text
 
 
+def get_description(soup):
+  list_of_class_list = [
+    ['introduction__text'],
+    ['basic-information__introduction', 'basic-information__contents-detail--white-space']
+  ]
+  for class_list in list_of_class_list:
+    description = soup.find('p', class_=class_list)
+    if description:
+      return description.get_text(strip=True)
+  return None
+
+
+# get the coordinate from the site's name or address
 def get_coordinate(name, address):
   # geocoder (OpenStreetMap) - (lat, long)
   location = name
@@ -43,7 +56,7 @@ def get_coordinate(name, address):
   # geopy (Nominatim) - (lat, long)
   try:
     geolocator = Nominatim(user_agent="user")
-    location = geolocator.geocode("福島県南会津郡下郷町大字大内")
+    location = geolocator.geocode(name)
     if (location is not None):
       return (location.latitude, location.longitude)
   except Exception as e:
@@ -62,12 +75,13 @@ def get_coordinate(name, address):
   return (None, None)
 
 
+# create site_df.csv
 def create_csv():
   global site_df
   
   service = Service(ChromeDriverManager().install())
   driver = webdriver.Chrome(service=service)
-  wait = WebDriverWait(driver, 10)  # Adjust the timeout as needed
+  wait = WebDriverWait(driver, 10) 
 
   url = "https://www.asoview.com/kankou/"
   driver.get(url)
@@ -95,18 +109,20 @@ def create_csv():
       site_address_text = parse_content(["住所"], soup)
       site_coordinate_lat, site_coordinate_lng = get_coordinate(site_name_text, site_address_text)
       site_homepage_text = parse_content(["ホームページ"], soup)
+      site_description = get_description(soup)
       
       print(site_name_text if site_name_text else "None")
       print(site_address_text if site_address_text else "None")
       print(site_coordinate_lat if site_coordinate_lat else "None")
       print(site_coordinate_lng if site_coordinate_lng else "None")
       print(site_homepage_text if site_homepage_text else "None")
+      print(site_description if site_description else None)
         
       print("\n")
       
       new_row = pd.DataFrame(
-        [[site_name_text, site_address_text, site_coordinate_lat, site_coordinate_lng, site_homepage_text]], 
-        columns=["Name", "Address", "Latitude", "Longitude", "Homepage"]
+        [[site_name_text, site_address_text, site_coordinate_lat, site_coordinate_lng, site_homepage_text, site_description]], 
+        columns=["Name", "Address", "Latitude", "Longitude", "Homepage", "Description"]
       )
       site_df = pd.concat([site_df, new_row], ignore_index=True)
       
@@ -116,10 +132,11 @@ def create_csv():
 
   driver.quit()
 
-#site_df = pd.DataFrame(columns=["Name", "Address", "Latitude", "Longitude", "Homepage"])
-#create_csv()
-#print(site_df.head(10))
-#site_df.to_csv("data/site_data.csv", index=False)
+
+site_df = pd.DataFrame(columns=["Name", "Address", "Latitude", "Longitude", "Homepage", "Description"])
+create_csv()
+print(site_df.head(10))
+site_df.to_csv("data/site_data.csv", index=False)
 
 #site_df_load = pd.read_csv("data/site_data.csv")
 #print(site_df_load.shape)
