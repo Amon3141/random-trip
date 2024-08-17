@@ -11,7 +11,6 @@ import pandas as pd
 import geocoder
 import requests
 import urllib
-import geopy
 from geopy.geocoders import Nominatim
 
 def parse_content(header_text_list, soup):
