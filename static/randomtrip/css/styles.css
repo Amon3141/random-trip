@@ -32,3 +32,74 @@ body, html {
 .start-button:hover {
     background-color: #0056b3;
 }
+
+main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(242, 242, 242);;
+}
+
+h2.form-title {
+    color: rgb(45, 45, 45);
+    font-size: 2rem;
+    margin-block-start: 0;
+    margin-block-end: 2.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: end
+}
+
+form label {
+    font-weight: bold;
+    color: rgb(45, 45, 45);
+    margin-inline-end: 1rem;
+}
+
+form input {
+    border: 1px solid #aaaaaa;
+    border-radius: 5px;
+    padding: 0.7rem;
+    width: 160px;
+    height: 20px;
+}
+
+form button.submit-button {
+    width: 100px;
+    height: 40px;
+    background-color: #363636;
+    color: #dfdfdf;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-block-start: 1rem;
+}
+
+form button.submit-button:hover {
+    background-color:rgb(69, 69, 69)6;
+}
+
+
+#test-container {
+    flex-grow: 1;
+    background-color: rgb(42, 42, 42);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
