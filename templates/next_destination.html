@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Next Destination{% endblock %}
+
+{% block content %}
+
+<div class="instruction-container-left">
+  <h2 class="instruction-text">Your next destination is...</h2>
+</div>
+<div class="next-destination-box">
+  <div class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+  <h1 class="next-destination-text">東京タワー</h1>
+  <h3 class="next-destination-address">〒105-0011 東京都港区芝公園4丁目2-8</h3>
+  <p class="next-destination-description">東京タワーには、150mのメインデッキ、250mのトップデッキの2つの展望台があり、東京の中心から世界有数のメトロポリスの息吹を感じることが出来ます。塔脚下のビル「フットタウン」には、オフィシャルショップやフードコート、タワーギャラリー等、1日過ごせる施設が充実。 赤羽橋駅、神谷町駅、御成門駅、芝公園駅など各駅から徒歩10分圏内にあり、好アクセスです。</p>
+  <button class="google-destination-button">Google "東京タワー"</button>
+  <button class="go-to-homepage-button">Go to homepage</button>
+</div>
+<div class="bottom-button-container-right">
+  <button class="go-to-this-place-button">Go to this place</button>
+</div>
+
+{% endblock %}

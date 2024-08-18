@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Moving...{% endblock %}
+
+{% block content %}
+
+<div class="instruction-container">
+  <h2 class="instruction-text">You are moving to</h2>
+</div>
+<h1 class="moving-destination-text">東京タワー</h1>
+<div class="bottom-button-container-center">
+  <a href="https://www.google.com/maps/dir/?api=1&origin=Current+Location&destination=東京タワー" target="_blank">
+    <button class="open-google-maps-button">Open Google Maps</button>
+  </a>
+</div>
+
+{% endblock %}

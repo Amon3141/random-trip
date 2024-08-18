@@ -5,12 +5,18 @@ from randomtrip.models import CustomUser, Trip, Activity
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
+from .python_functions.get_random_site import get_random_site
 
-# Create your views here.
-def randomtrip(request):
-  return render(request, 'randomtrip.html')
+
+def roulette_view(request):
+  return render(request, 'roulette.html')
+
+def next_destination_view(request):
+  return render(request, 'next_destination.html')
+
+def moving_view(request):
+  return render(request, 'moving.html')
 
 def custom_login_view(request):
   if request.method == 'POST':
@@ -24,26 +30,31 @@ def custom_login_view(request):
   
   return render(request, 'login.html', {'form': form})
 
-
-
-def option_screen(request):
-  return render(request, 'option_screen.html')
-
-def test_screen(request):
-  return render(request, 'test.html')
-
 @csrf_exempt
 @require_POST
-def add_new_activity(request):
-  try:
-    data = json.loads(request.body)
-    Activity.objects.create(
-      title = data['title'],
-      type = data['type'],
-    )
-    response = {'message': 'Added a new activity successfully'}
-    return JsonResponse(response, status=201)
-  except KeyError as e:
-    return JsonResponse({'error': f'Missing field: {e.args[0]}'}, status=400)
-  except Exception as e:
-    return JsonResponse({'error': str(e)}, status=500)
+def provide_random_site(request):
+  if request.method == 'POST':
+    try:
+      data = json.loads(request.body)
+      current_latitude = data.get('latitude')
+      current_longitude = data.get('longitude')
+      radius = data.get('radius')
+      
+      name, address, description, homepage = get_random_site(current_latitude, current_longitude, radius)
+      
+      if name is not None:
+        response_data = {
+          'name': name,
+          'address': address,
+          'description': description,
+          'homepage': homepage,
+          'google_maps_url': f"https://www.google.com/maps/dir/?api=1&origin=Current+Location&destination={name}"
+        }
+        return JsonResponse(response_data)
+      else:
+        return JsonResponse({'error': 'No site was found'}, status=404)
+      
+    except json.JSONDecodeError:
+      return JsonResponse({'error': 'Invalid data was sent'}, status=400)
+  
+  return JsonResponse({'error': 'POST request is required'}, status=405)

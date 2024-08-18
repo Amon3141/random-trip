@@ -37,8 +37,8 @@ def get_random_site(latitude, longitude, radius):
   if num_candidate > 0:
     random_site_idx = random.randint(0, num_candidate-1)
     random_site = site_candidate.iloc[random_site_idx]
-    return random_site["Name"]
+    return random_site["Name"], random_site["Address"], random_site["Description"], random_site["Homepage"]
   else:
-    return None
+    return None, None, None, None
 
-print(get_random_site(36.9863379, 138.7441532, 100))
+#print(get_random_site(36.9863379, 138.7441532, 100))
