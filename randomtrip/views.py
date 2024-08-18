@@ -7,16 +7,25 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 from .python_functions.get_random_site import get_random_site
+import math
 
 
 def roulette_view(request):
   return render(request, 'roulette.html')
 
 def next_destination_view(request):
-  return render(request, 'next_destination.html')
+  show_homepage = request.GET.get('show_homepage', 'false')
+  context = {
+    'show_homepage': show_homepage,
+  }
+  return render(request, 'next_destination.html', context)
 
 def moving_view(request):
-  return render(request, 'moving.html')
+  destination = request.GET.get('destination', '東京タワー')
+  context = {
+    'destination': destination,
+  }
+  return render(request, 'moving.html', context)
 
 def custom_login_view(request):
   if request.method == 'POST':
@@ -33,6 +42,7 @@ def custom_login_view(request):
 @csrf_exempt
 @require_POST
 def provide_random_site(request):
+  print("called")
   if request.method == 'POST':
     try:
       data = json.loads(request.body)
@@ -42,13 +52,16 @@ def provide_random_site(request):
       
       name, address, description, homepage = get_random_site(current_latitude, current_longitude, radius)
       
+      def is_not_nan(value):
+        return value == value and not isinstance(value, float) or not math.isnan(value)
+      
       if name is not None:
         response_data = {
-          'name': name,
-          'address': address,
-          'description': description,
-          'homepage': homepage,
-          'google_maps_url': f"https://www.google.com/maps/dir/?api=1&origin=Current+Location&destination={name}"
+          'name': name if is_not_nan(name) else '',
+          'address': address if is_not_nan(address) else '',
+          'description': description if is_not_nan(description) else '',
+          'homepage': homepage if is_not_nan(homepage) else '',
+          'google_maps_url': f"https://www.google.com/maps/dir/?api=1&origin=Current+Location&destination={name}" if is_not_nan(name) else ''
         }
         return JsonResponse(response_data)
       else:

@@ -14,6 +14,11 @@
   </select>
   <h3 class="instruction-text">km</h3>
 </div>
-<button id="spin-roulette">Spin a Roulette</button>
+<div id="loader" class="loader-container">
+  <div class="loader"></div>
+</div>
+<a id="spin-roulette-link">
+  <button id="spin-roulette" data-url="{% url 'randomtrip:next-destination' %}">Spin a Roulette</button>
+</a>
 
 {% endblock %}

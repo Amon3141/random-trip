@@ -11,14 +11,26 @@
   <div class="loading-overlay">
     <div class="spinner"></div>
   </div>
-  <h1 class="next-destination-text">東京タワー</h1>
-  <h3 class="next-destination-address">〒105-0011 東京都港区芝公園4丁目2-8</h3>
-  <p class="next-destination-description">東京タワーには、150mのメインデッキ、250mのトップデッキの2つの展望台があり、東京の中心から世界有数のメトロポリスの息吹を感じることが出来ます。塔脚下のビル「フットタウン」には、オフィシャルショップやフードコート、タワーギャラリー等、1日過ごせる施設が充実。 赤羽橋駅、神谷町駅、御成門駅、芝公園駅など各駅から徒歩10分圏内にあり、好アクセスです。</p>
-  <button class="google-destination-button">Google "東京タワー"</button>
-  <button class="go-to-homepage-button">Go to homepage</button>
+  <h1 class="next-destination-text"></h1>
+  <h3 class="next-destination-address"></h3>
+  <p class="next-destination-description"></p>
+  {% if show_homepage == "true" %}
+  <a href="" target="_blank" id="go-to-homepage-link">
+    <button class="go-to-homepage-button">Go to homepage</button>
+  </a>
+  {% else %}
+  <a href="" target="_blank" id="google-destination-link">
+    <button class="google-destination-button">Google ""</button>
+  </a>
+  {% endif %}
 </div>
-<div class="bottom-button-container-right">
-  <button class="go-to-this-place-button">Go to this place</button>
+<div class="bottom-button-container-space">
+  <a id="spin-again-link">
+    <button class="spin-again-button" data-url="{% url 'randomtrip:roulette' %}">Spin Again</button>
+  </a>
+  <a id="go-to-this-place-link">
+    <button class="go-to-this-place-button" data-url="{% url 'randomtrip:moving' %}">Go to this place</button>
+  </a>
 </div>
 
 {% endblock %}

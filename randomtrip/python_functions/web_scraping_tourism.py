@@ -116,7 +116,7 @@ def create_csv():
       print(site_coordinate_lat if site_coordinate_lat else "None")
       print(site_coordinate_lng if site_coordinate_lng else "None")
       print(site_homepage_text if site_homepage_text else "None")
-      print(site_description if site_description else None)
+      print(site_description if site_description else "None")
         
       print("\n")
       
