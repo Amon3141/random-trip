@@ -8,11 +8,13 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 from .python_functions.get_random_site import get_random_site
 import math
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def roulette_view(request):
   return render(request, 'roulette.html')
 
+@login_required
 def next_destination_view(request):
   show_homepage = request.GET.get('show_homepage', 'false')
   context = {
@@ -20,24 +22,13 @@ def next_destination_view(request):
   }
   return render(request, 'next_destination.html', context)
 
+@login_required
 def moving_view(request):
   destination = request.GET.get('destination', '東京タワー')
   context = {
     'destination': destination,
   }
   return render(request, 'moving.html', context)
-
-def custom_login_view(request):
-  if request.method == 'POST':
-    form = AuthenticationForm(request, data=request.POST)
-    if form.is_valie():
-      user = form.get_user()
-      login(request, user)
-      return redirect('home')
-  else:
-    form = AuthenticationForm()
-  
-  return render(request, 'login.html', {'form': form})
 
 @csrf_exempt
 @require_POST

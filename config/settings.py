@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -31,7 +31,7 @@ AUTH_USER_MODEL = 'randomtrip.CustomUser'
 SECRET_KEY = 'django-insecure-&ffjetlrs-6$93vz9n41t^z=^ke+7dqnsr)7o_+!+9724&*5xv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '.pythonanywhere.com', 'Amon.pythonanywhere.com']
 
@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'randomtrip'
+    'randomtrip',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -135,6 +136,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = "randomtrip:roulette"
+LOGOUT_REDIRECT_URL = "randomtrip:roulette"
 
 try:
     from .local_settings import *

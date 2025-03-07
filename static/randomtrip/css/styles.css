@@ -1,4 +1,4 @@
-/* styles.css */
+/* form.css */
 * {
     box-sizing: border-box;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -26,7 +26,138 @@ header {
     height: 130px;
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: #ececec;
+}
+
+.header-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-inline: 2rem;
+}
+
+.account-circle-holder,
+.login-button-holder,
+.header-placeholder,
+.logout-button-holder {
+  width: 5rem; /* Match the width of your account circle or login button */
+}
+
+.logout-button-holder {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-circle-holder,
+.login-button-holder {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+button.login {
+    width: 4rem;
+}
+
+button.logout {
+    width: 5rem;
+}
+
+button.login,
+button.logout {
+    height: 2.1rem;
+    background-color: #474747;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+}
+
+.header-placeholder {
+    visibility: hidden;
+}
+
+.account-menu {
+    position: relative;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.account-circle {
+    height: 3rem;
+    width: 3rem;
+    font-size: 1.5rem;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #CA8500;
+    border: none;
+    border-radius: 1.5rem;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.account-circle:hover {
+    background-color: #B57600;
+}
+
+.popup-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 120px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    padding-top: 10px;
+}
+
+.account-menu:hover .popup-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-info {
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.username {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.logout-button {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-align: left;
+}
+
+.logout-button:hover {
+    background-color: #f5f5f5;
 }
 
 button {
@@ -203,17 +334,13 @@ main {
     margin-block-end: 1.5rem;
 }
 
-.header-container {
-    display: flex;
-    align-items: center;
-    margin-inline: 2.5rem;
-}
-
 .app-title {
     font-size: 30px;
     color: #474747;
     font-weight: bold;
     letter-spacing: 2px;
+    text-align: center;
+    flex-grow: 1;
 }
 
 .arrived-button {

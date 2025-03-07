@@ -2,18 +2,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 基本設定みたいな -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie-edge">
   <title>{% block title %}{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'randomtrip/css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'randomtrip/css/form.css' %}">
 </head>
 <body>
   <header>
-    <div class="header-container">
+    <div class="header-content">
+      <div class="header-placeholder"></div>
       <div class="app-title">🚶‍♂️‍➡️ RandomTrip 🧳</div>
-      <!-- <div class="account-circle">A</div> -->
+
+      {% if user.is_authenticated %}
+        <div class="account-menu">
+          <div class="account-circle">{{ user.username|slice:":1" }}</div>
+          <div class="popup-panel">
+            <div class="user-info">
+              <span class="username">{{ user.username }}</span>
+            </div>
+            <div class="logout-button-holder">
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="logout">Logout</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="login-button-holder">
+          <a href="{% url 'login' %}">
+            <button class="login">Login</button>
+          </a>
+        </div>
+      {% endif %}
     </div>
   </header>
 
@@ -23,4 +46,5 @@
   </main>
 
   <script src="{% static 'randomtrip/js/scripts.js' %}"></script>
+</body>
 </html>

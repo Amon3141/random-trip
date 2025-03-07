@@ -1,8 +1,11 @@
 import numpy as np
 import pandas as pd
 import random
+import os
+from django.conf import settings
 
-site_df = pd.read_csv("data/site_data.csv")
+csv_file_path = os.path.join(settings.BASE_DIR, 'data/site_data.csv')
+site_df = pd.read_csv(csv_file_path)
 
 def km_to_degrees_latitude(km):
   return km / 111
