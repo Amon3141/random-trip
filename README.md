@@ -1,8 +1,13 @@
 # RandomTrip
 
-A Django web application that selects random tourism sites within a specified distance and provides relevant information (descriptions, homepage URLs, Google Maps integration).
+A Django web application to guide a fun, randomized trip in Japan. The app selects random tourism sites within a specified distance and provides relevant information (descriptions, homepage URLs, Google Maps integration).
 
 **Note:** Currently optimized for Japanese tourism sites. Select "All" if you are outside of Japan.
+
+<img width="400" alt="RandomTrip demo 1" src="https://github.com/user-attachments/assets/b15ad3f1-a569-4686-882a-47e1eb3ba31c" />
+<img width="400" alt="RandomTrip demo 2" src="https://github.com/user-attachments/assets/23734a9f-96b1-4307-964c-8903eda34348" />
+<img width="400" alt="RandomTrip demo 3" src="https://github.com/user-attachments/assets/7b8ae669-cb78-49c4-8100-5f945efc31bf" />
+<img width="400" alt="RandomTrip demo 4" src="https://github.com/user-attachments/assets/880c0f72-a05d-46d6-85b0-a749e1c45d1b" />
 
 ## Features
 
@@ -119,13 +124,3 @@ random-trip/
 - **Pandas**: Data manipulation
 - **Geopy/Geocoder**: Geographic coordinate services
 - **NumPy**: Numerical computations
-
-## Development
-
-- **Database**: SQLite (development)
-- **Static Files**: Django's static file handling
-- **Authentication**: Custom user model with Django's auth system
-
-## License
-
-See [LICENSE](LICENSE) file for details.
