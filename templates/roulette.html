@@ -14,6 +14,12 @@
   </select>
   <h3 class="instruction-text">km</h3>
 </div>
+
+<div id="manual-location" style="display: none; text-align: center; margin: 20px 0;">
+  <p>Enter coordinates: <input type="number" id="lat" placeholder="35.6762" step="any" style="width: 100px;"> <input type="number" id="lng" placeholder="139.6503" step="any" style="width: 100px;"></p>
+  <button onclick="useManual()">Use Manual Location</button>
+</div>
+
 <div id="loader" class="loader-container">
   <div class="loader"></div>
 </div>

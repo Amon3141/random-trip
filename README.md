@@ -1,7 +1,131 @@
 # RandomTrip
 
-This app selects random tourism sites within the specified distance and provides relavant information (descriptions, homeoage urls, Google Maps
-(currently only contains Japanese tourism sites, select "All" if you are outside of Japan and try this app)
+A Django web application that selects random tourism sites within a specified distance and provides relevant information (descriptions, homepage URLs, Google Maps integration).
 
-Available at: https://amon.pythonanywhere.com
-(currently optimized for desktop use only)
+**Note:** Currently optimized for Japanese tourism sites. Select "All" if you are outside of Japan.
+
+## Features
+
+- Random tourism site selection within specified radius
+- User authentication and trip management
+- Activity categorization (Tourism, Food, Lodging)
+- Geographic coordinate-based site filtering
+- Web scraping for tourism data collection
+
+## Prerequisites
+
+- Python 3.8 or higher
+- Chrome browser (for web scraping functionality)
+- Git
+
+## Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd random-trip
+   ```
+
+2. **Create and activate virtual environment**
+   ```bash
+   python -m venv myenv
+   source myenv/bin/activate  # On Windows: myenv\Scripts\activate
+   ```
+
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Set up the database**
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+
+5. **Collect static files**
+   ```bash
+   python manage.py collectstatic
+   ```
+
+## Running the Application
+
+1. **Start the development server**
+   ```bash
+   python manage.py runserver
+   ```
+
+2. **Open your browser and navigate to**
+   ```
+   http://127.0.0.1:8000/
+   ```
+
+## Usage
+
+1. **Register/Login**: Create an account or log in to manage your trips
+2. **Set Location**: Enter your current location coordinates
+3. **Choose Radius**: Select the search radius in kilometers
+4. **Get Random Site**: Click the roulette to get a random tourism site
+5. **Manage Trips**: Create and organize your trips with activities
+
+## Common Issues and Solutions
+
+#### 1. **"DisallowedHost" Error**
+**Problem**: Django blocks requests from 127.0.0.1:8000.
+
+**Solution**: 
+- Add `'127.0.0.1'` to `ALLOWED_HOSTS` in `config/settings.py`
+
+#### 2. **"Location unavailable" Error**
+**Problem**: Geolocation fails with error code 2.
+
+**Solution**:
+- **macOS**: System Preferences → Security & Privacy → Privacy → Location Services
+  - Enable Location Services
+  - Allow your browser to access location
+- **Browser Settings**: Allow location access for localhost
+- **Manual Fallback**: Enter coordinates manually when GPS fails
+
+### Manual Location Coordinates
+
+When GPS fails, you can enter coordinates manually:
+
+- **Tokyo**: 35.6762, 139.6503
+- **Osaka**: 34.6937, 135.5023
+- **Kyoto**: 35.0116, 135.7681
+- **Yokohama**: 35.4437, 139.6380
+- **Nagoya**: 35.1815, 136.9066
+
+## Project Structure
+
+```
+random-trip/
+├── accounts/          # User authentication app
+├── config/           # Django project settings
+├── randomtrip/       # Main application
+│   ├── python_functions/  # Data processing utilities
+│   └── ...
+├── static/           # Static files (CSS, JS)
+├── templates/        # HTML templates
+├── data/            # CSV data files
+└── manage.py        # Django management script
+```
+
+## Dependencies
+
+- **Django**: Web framework
+- **Selenium**: Web scraping and browser automation
+- **BeautifulSoup**: HTML parsing
+- **Pandas**: Data manipulation
+- **Geopy/Geocoder**: Geographic coordinate services
+- **NumPy**: Numerical computations
+
+## Development
+
+- **Database**: SQLite (development)
+- **Static Files**: Django's static file handling
+- **Authentication**: Custom user model with Django's auth system
+
+## License
+
+See [LICENSE](LICENSE) file for details.

@@ -9,10 +9,13 @@ function showLoader() {
 function spinRoulette(radius) {
     const nextURL = document.querySelector("#spin-roulette").dataset.url;
     showLoader();
+    console.log("Starting geolocation request...");
     if (navigator.geolocation) {
+        console.log("Geolocation is supported");
         navigator.geolocation.getCurrentPosition(position => {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
+            console.log("Location obtained:", latitude, longitude);
     
             fetch('/api/get-random-site/', {
                 method: 'POST',
@@ -41,7 +44,24 @@ function spinRoulette(radius) {
         }, error => {
             hideLoader();
             console.error('Geolocation error:', error);
-            alert("Unable to get your location. Please ensure location services are enabled.");
+            console.log('Error code:', error.code);
+            console.log('Error message:', error.message);
+            
+            let errorMessage = "Unable to get your location. ";
+            switch(error.code) {
+                case 1:
+                    errorMessage += "Permission denied. Please allow location access.";
+                    break;
+                case 2:
+                    errorMessage += "Location unavailable. Please check your device settings.";
+                    break;
+                case 3:
+                    errorMessage += "Request timed out. Please try again.";
+                    break;
+                default:
+                    errorMessage += "Please ensure location services are enabled.";
+            }
+            document.getElementById('manual-location').style.display = 'block';
         });
     } else {
         hideLoader();
@@ -138,3 +158,42 @@ window.addEventListener('load', function() {
         displayRandomSite();
     }
 });
+
+function useManual() {
+    const lat = parseFloat(document.getElementById('lat').value);
+    const lng = parseFloat(document.getElementById('lng').value);
+    const radius = parseInt(document.getElementById('distance-input').value, 10);
+    
+    if (isNaN(lat) || isNaN(lng)) {
+        alert("Please enter valid coordinates");
+        return;
+    }
+    
+    const nextURL = document.querySelector("#spin-roulette").dataset.url;
+    showLoader();
+    
+    fetch('/api/get-random-site/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCsrfToken()
+        },
+        body: JSON.stringify({ latitude: lat, longitude: lng, radius: radius})
+    })
+    .then(response => response.json())
+    .then(data => {
+        sessionStorage.setItem('randomSiteData', JSON.stringify(data));
+        let showHomepage = true;
+        if (data.homepage == '') showHomepage = false;
+
+        const modifiedURL = new URL(nextURL, window.location.origin);
+        modifiedURL.searchParams.set('show_homepage', showHomepage);
+
+        window.location.href = modifiedURL.toString();
+    })
+    .catch(error => {
+        hideLoader();
+        console.error('Error:', error);
+        alert("An error occurred. Please try again.");
+    });
+}

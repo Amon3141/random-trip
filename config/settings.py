@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-&ffjetlrs-6$93vz9n41t^z=^ke+7dqnsr)7o_+!+9724&*5xv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '.pythonanywhere.com', 'Amon.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.pythonanywhere.com', 'Amon.pythonanywhere.com']
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
